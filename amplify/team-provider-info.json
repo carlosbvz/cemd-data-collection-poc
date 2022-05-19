@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-cemddatapoc-dev-141114-authRole",
+      "UnauthRoleArn": "arn:aws:iam::474215544787:role/amplify-cemddatapoc-dev-141114-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::474215544787:role/amplify-cemddatapoc-dev-141114-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-cemddatapoc-dev-141114-deployment",
+      "UnauthRoleName": "amplify-cemddatapoc-dev-141114-unauthRole",
+      "StackName": "amplify-cemddatapoc-dev-141114",
+      "StackId": "arn:aws:cloudformation:us-east-1:474215544787:stack/amplify-cemddatapoc-dev-141114/d72c0e00-d7af-11ec-80dd-127c4ae49d53",
+      "AmplifyAppId": "d2bbyl7z2vd0ww"
+    }
+  }
+}
