@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "cemddatacollectionpo",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "/Users/cbenavides/Documents/work/CEMD/pocs/data-collection-poc/cemd-data-collection-poc/amplify/backend/api/cemddatacollectionpo/schema.graphql",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "expirationTime": 7
+    }
+  }
+}
