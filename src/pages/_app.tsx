@@ -7,7 +7,6 @@ Amplify.configure(awsExports);
 function App({ signOut, user, Component, PageProps }) {
   return (
     <>
-      <button onClick={signOut}>Sign out</button>
       <Component {...PageProps} />
     </>
   );
