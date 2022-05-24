@@ -1,16 +1,9 @@
-import { Admin, Resource } from 'react-admin';
-import { UserList } from '../components/users';
-import jsonServerProvider from 'ra-data-json-server';
-
-const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
+import {Typography} from  "@mui/material";
 
 export default function Home() {
   return (
     
-    <Admin dataProvider={dataProvider}>
-        <Resource name="users" list={UserList} />
-        {/* <Resource name="districts" list={UserList} /> */}
-    </Admin>
+    <Typography variant="h1" component="h1"> Hi there! </Typography>
     
   )
 }
