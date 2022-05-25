@@ -2,6 +2,69 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createDistrict = /* GraphQL */ `
+  mutation CreateDistrict(
+    $input: CreateDistrictInput!
+    $condition: ModelDistrictConditionInput
+  ) {
+    createDistrict(input: $input, condition: $condition) {
+      id
+      lea_id
+      name
+      address
+      city
+      logos
+      website
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updateDistrict = /* GraphQL */ `
+  mutation UpdateDistrict(
+    $input: UpdateDistrictInput!
+    $condition: ModelDistrictConditionInput
+  ) {
+    updateDistrict(input: $input, condition: $condition) {
+      id
+      lea_id
+      name
+      address
+      city
+      logos
+      website
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deleteDistrict = /* GraphQL */ `
+  mutation DeleteDistrict(
+    $input: DeleteDistrictInput!
+    $condition: ModelDistrictConditionInput
+  ) {
+    deleteDistrict(input: $input, condition: $condition) {
+      id
+      lea_id
+      name
+      address
+      city
+      logos
+      website
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
 export const createBlog = /* GraphQL */ `
   mutation CreateBlog(
     $input: CreateBlogInput!
@@ -16,12 +79,19 @@ export const createBlog = /* GraphQL */ `
           title
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           blogPostsId
         }
         nextToken
+        startedAt
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
@@ -39,12 +109,19 @@ export const updateBlog = /* GraphQL */ `
           title
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           blogPostsId
         }
         nextToken
+        startedAt
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
@@ -62,12 +139,19 @@ export const deleteBlog = /* GraphQL */ `
           title
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           blogPostsId
         }
         nextToken
+        startedAt
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
@@ -84,9 +168,13 @@ export const createPost = /* GraphQL */ `
         name
         posts {
           nextToken
+          startedAt
         }
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       comments {
         items {
@@ -94,12 +182,19 @@ export const createPost = /* GraphQL */ `
           content
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           postCommentsId
         }
         nextToken
+        startedAt
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       blogPostsId
     }
   }
@@ -117,9 +212,13 @@ export const updatePost = /* GraphQL */ `
         name
         posts {
           nextToken
+          startedAt
         }
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       comments {
         items {
@@ -127,12 +226,19 @@ export const updatePost = /* GraphQL */ `
           content
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           postCommentsId
         }
         nextToken
+        startedAt
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       blogPostsId
     }
   }
@@ -150,9 +256,13 @@ export const deletePost = /* GraphQL */ `
         name
         posts {
           nextToken
+          startedAt
         }
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       comments {
         items {
@@ -160,12 +270,19 @@ export const deletePost = /* GraphQL */ `
           content
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           postCommentsId
         }
         nextToken
+        startedAt
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       blogPostsId
     }
   }
@@ -185,17 +302,27 @@ export const createComment = /* GraphQL */ `
           name
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
         comments {
           nextToken
+          startedAt
         }
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         blogPostsId
       }
       content
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       postCommentsId
     }
   }
@@ -215,17 +342,27 @@ export const updateComment = /* GraphQL */ `
           name
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
         comments {
           nextToken
+          startedAt
         }
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         blogPostsId
       }
       content
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       postCommentsId
     }
   }
@@ -245,17 +382,27 @@ export const deleteComment = /* GraphQL */ `
           name
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
         comments {
           nextToken
+          startedAt
         }
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         blogPostsId
       }
       content
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       postCommentsId
     }
   }

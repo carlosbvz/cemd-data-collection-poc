@@ -4,6 +4,10 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 
+type DistrictMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
 type BlogMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
@@ -14,6 +18,20 @@ type PostMetaData = {
 
 type CommentMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+export declare class District {
+  readonly id: string;
+  readonly lea_id: number;
+  readonly name?: string | null;
+  readonly address?: string | null;
+  readonly city?: string | null;
+  readonly logos?: string | null;
+  readonly website?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<District, DistrictMetaData>);
+  static copyOf(source: District, mutator: (draft: MutableModel<District, DistrictMetaData>) => MutableModel<District, DistrictMetaData> | void): District;
 }
 
 export declare class Blog {

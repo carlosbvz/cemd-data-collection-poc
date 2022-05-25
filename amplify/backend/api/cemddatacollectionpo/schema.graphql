@@ -1,3 +1,13 @@
+type District @model @auth(rules:[{allow: public}]) {
+  id: ID!
+  lea_id: Int!
+  name: String
+  address: String
+  city: String
+  logos: String
+  website: String
+}
+
 type Blog @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String!

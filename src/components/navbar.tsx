@@ -10,9 +10,11 @@ import { Auth } from 'aws-amplify';
 
 
 export default function NavBar() {
+  
   async function signOut() {
     try {
         await Auth.signOut();
+        document.location.reload();
     } catch (error) {
         console.log('error signOut in', error);
     }

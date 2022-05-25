@@ -2,17 +2,54 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateBlogInput = {
+export type CreateDistrictInput = {
   id?: string | null,
-  name: string,
+  lea_id: number,
+  name?: string | null,
+  address?: string | null,
+  city?: string | null,
+  logos?: string | null,
+  website?: string | null,
+  _version?: number | null,
 };
 
-export type ModelBlogConditionInput = {
+export type ModelDistrictConditionInput = {
+  lea_id?: ModelIntInput | null,
   name?: ModelStringInput | null,
-  and?: Array< ModelBlogConditionInput | null > | null,
-  or?: Array< ModelBlogConditionInput | null > | null,
-  not?: ModelBlogConditionInput | null,
+  address?: ModelStringInput | null,
+  city?: ModelStringInput | null,
+  logos?: ModelStringInput | null,
+  website?: ModelStringInput | null,
+  and?: Array< ModelDistrictConditionInput | null > | null,
+  or?: Array< ModelDistrictConditionInput | null > | null,
+  not?: ModelDistrictConditionInput | null,
 };
+
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export enum ModelAttributeTypes {
+  binary = "binary",
+  binarySet = "binarySet",
+  bool = "bool",
+  list = "list",
+  map = "map",
+  number = "number",
+  numberSet = "numberSet",
+  string = "string",
+  stringSet = "stringSet",
+  _null = "_null",
+}
+
 
 export type ModelStringInput = {
   ne?: string | null,
@@ -30,20 +67,6 @@ export type ModelStringInput = {
   size?: ModelSizeInput | null,
 };
 
-export enum ModelAttributeTypes {
-  binary = "binary",
-  binarySet = "binarySet",
-  bool = "bool",
-  list = "list",
-  map = "map",
-  number = "number",
-  numberSet = "numberSet",
-  string = "string",
-  stringSet = "stringSet",
-  _null = "_null",
-}
-
-
 export type ModelSizeInput = {
   ne?: number | null,
   eq?: number | null,
@@ -54,6 +77,51 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
+export type District = {
+  __typename: "District",
+  id: string,
+  lea_id: number,
+  name?: string | null,
+  address?: string | null,
+  city?: string | null,
+  logos?: string | null,
+  website?: string | null,
+  createdAt: string,
+  updatedAt: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+};
+
+export type UpdateDistrictInput = {
+  id: string,
+  lea_id?: number | null,
+  name?: string | null,
+  address?: string | null,
+  city?: string | null,
+  logos?: string | null,
+  website?: string | null,
+  _version?: number | null,
+};
+
+export type DeleteDistrictInput = {
+  id: string,
+  _version?: number | null,
+};
+
+export type CreateBlogInput = {
+  id?: string | null,
+  name: string,
+  _version?: number | null,
+};
+
+export type ModelBlogConditionInput = {
+  name?: ModelStringInput | null,
+  and?: Array< ModelBlogConditionInput | null > | null,
+  or?: Array< ModelBlogConditionInput | null > | null,
+  not?: ModelBlogConditionInput | null,
+};
+
 export type Blog = {
   __typename: "Blog",
   id: string,
@@ -61,12 +129,16 @@ export type Blog = {
   posts?: ModelPostConnection | null,
   createdAt: string,
   updatedAt: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
 };
 
 export type ModelPostConnection = {
   __typename: "ModelPostConnection",
   items:  Array<Post | null >,
   nextToken?: string | null,
+  startedAt?: number | null,
 };
 
 export type Post = {
@@ -77,6 +149,9 @@ export type Post = {
   comments?: ModelCommentConnection | null,
   createdAt: string,
   updatedAt: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
   blogPostsId?: string | null,
 };
 
@@ -84,6 +159,7 @@ export type ModelCommentConnection = {
   __typename: "ModelCommentConnection",
   items:  Array<Comment | null >,
   nextToken?: string | null,
+  startedAt?: number | null,
 };
 
 export type Comment = {
@@ -93,21 +169,27 @@ export type Comment = {
   content: string,
   createdAt: string,
   updatedAt: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
   postCommentsId?: string | null,
 };
 
 export type UpdateBlogInput = {
   id: string,
   name?: string | null,
+  _version?: number | null,
 };
 
 export type DeleteBlogInput = {
   id: string,
+  _version?: number | null,
 };
 
 export type CreatePostInput = {
   id?: string | null,
   title: string,
+  _version?: number | null,
   blogPostsId?: string | null,
 };
 
@@ -138,16 +220,19 @@ export type ModelIDInput = {
 export type UpdatePostInput = {
   id: string,
   title?: string | null,
+  _version?: number | null,
   blogPostsId?: string | null,
 };
 
 export type DeletePostInput = {
   id: string,
+  _version?: number | null,
 };
 
 export type CreateCommentInput = {
   id?: string | null,
   content: string,
+  _version?: number | null,
   postCommentsId?: string | null,
 };
 
@@ -162,11 +247,33 @@ export type ModelCommentConditionInput = {
 export type UpdateCommentInput = {
   id: string,
   content?: string | null,
+  _version?: number | null,
   postCommentsId?: string | null,
 };
 
 export type DeleteCommentInput = {
   id: string,
+  _version?: number | null,
+};
+
+export type ModelDistrictFilterInput = {
+  id?: ModelIDInput | null,
+  lea_id?: ModelIntInput | null,
+  name?: ModelStringInput | null,
+  address?: ModelStringInput | null,
+  city?: ModelStringInput | null,
+  logos?: ModelStringInput | null,
+  website?: ModelStringInput | null,
+  and?: Array< ModelDistrictFilterInput | null > | null,
+  or?: Array< ModelDistrictFilterInput | null > | null,
+  not?: ModelDistrictFilterInput | null,
+};
+
+export type ModelDistrictConnection = {
+  __typename: "ModelDistrictConnection",
+  items:  Array<District | null >,
+  nextToken?: string | null,
+  startedAt?: number | null,
 };
 
 export type ModelBlogFilterInput = {
@@ -181,6 +288,7 @@ export type ModelBlogConnection = {
   __typename: "ModelBlogConnection",
   items:  Array<Blog | null >,
   nextToken?: string | null,
+  startedAt?: number | null,
 };
 
 export type ModelPostFilterInput = {
@@ -201,6 +309,75 @@ export type ModelCommentFilterInput = {
   postCommentsId?: ModelIDInput | null,
 };
 
+export type CreateDistrictMutationVariables = {
+  input: CreateDistrictInput,
+  condition?: ModelDistrictConditionInput | null,
+};
+
+export type CreateDistrictMutation = {
+  createDistrict?:  {
+    __typename: "District",
+    id: string,
+    lea_id: number,
+    name?: string | null,
+    address?: string | null,
+    city?: string | null,
+    logos?: string | null,
+    website?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type UpdateDistrictMutationVariables = {
+  input: UpdateDistrictInput,
+  condition?: ModelDistrictConditionInput | null,
+};
+
+export type UpdateDistrictMutation = {
+  updateDistrict?:  {
+    __typename: "District",
+    id: string,
+    lea_id: number,
+    name?: string | null,
+    address?: string | null,
+    city?: string | null,
+    logos?: string | null,
+    website?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type DeleteDistrictMutationVariables = {
+  input: DeleteDistrictInput,
+  condition?: ModelDistrictConditionInput | null,
+};
+
+export type DeleteDistrictMutation = {
+  deleteDistrict?:  {
+    __typename: "District",
+    id: string,
+    lea_id: number,
+    name?: string | null,
+    address?: string | null,
+    city?: string | null,
+    logos?: string | null,
+    website?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
 export type CreateBlogMutationVariables = {
   input: CreateBlogInput,
   condition?: ModelBlogConditionInput | null,
@@ -219,12 +396,19 @@ export type CreateBlogMutation = {
         title: string,
         createdAt: string,
         updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         blogPostsId?: string | null,
       } | null >,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -246,12 +430,19 @@ export type UpdateBlogMutation = {
         title: string,
         createdAt: string,
         updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         blogPostsId?: string | null,
       } | null >,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -273,12 +464,19 @@ export type DeleteBlogMutation = {
         title: string,
         createdAt: string,
         updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         blogPostsId?: string | null,
       } | null >,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -299,9 +497,13 @@ export type CreatePostMutation = {
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     comments?:  {
       __typename: "ModelCommentConnection",
@@ -311,12 +513,19 @@ export type CreatePostMutation = {
         content: string,
         createdAt: string,
         updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         postCommentsId?: string | null,
       } | null >,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     blogPostsId?: string | null,
   } | null,
 };
@@ -338,9 +547,13 @@ export type UpdatePostMutation = {
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     comments?:  {
       __typename: "ModelCommentConnection",
@@ -350,12 +563,19 @@ export type UpdatePostMutation = {
         content: string,
         createdAt: string,
         updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         postCommentsId?: string | null,
       } | null >,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     blogPostsId?: string | null,
   } | null,
 };
@@ -377,9 +597,13 @@ export type DeletePostMutation = {
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     comments?:  {
       __typename: "ModelCommentConnection",
@@ -389,12 +613,19 @@ export type DeletePostMutation = {
         content: string,
         createdAt: string,
         updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         postCommentsId?: string | null,
       } | null >,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     blogPostsId?: string | null,
   } | null,
 };
@@ -418,18 +649,28 @@ export type CreateCommentMutation = {
         name: string,
         createdAt: string,
         updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       comments?:  {
         __typename: "ModelCommentConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       blogPostsId?: string | null,
     } | null,
     content: string,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     postCommentsId?: string | null,
   } | null,
 };
@@ -453,18 +694,28 @@ export type UpdateCommentMutation = {
         name: string,
         createdAt: string,
         updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       comments?:  {
         __typename: "ModelCommentConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       blogPostsId?: string | null,
     } | null,
     content: string,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     postCommentsId?: string | null,
   } | null,
 };
@@ -488,19 +739,110 @@ export type DeleteCommentMutation = {
         name: string,
         createdAt: string,
         updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       comments?:  {
         __typename: "ModelCommentConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       blogPostsId?: string | null,
     } | null,
     content: string,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     postCommentsId?: string | null,
+  } | null,
+};
+
+export type GetDistrictQueryVariables = {
+  id: string,
+};
+
+export type GetDistrictQuery = {
+  getDistrict?:  {
+    __typename: "District",
+    id: string,
+    lea_id: number,
+    name?: string | null,
+    address?: string | null,
+    city?: string | null,
+    logos?: string | null,
+    website?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type ListDistrictsQueryVariables = {
+  filter?: ModelDistrictFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListDistrictsQuery = {
+  listDistricts?:  {
+    __typename: "ModelDistrictConnection",
+    items:  Array< {
+      __typename: "District",
+      id: string,
+      lea_id: number,
+      name?: string | null,
+      address?: string | null,
+      city?: string | null,
+      logos?: string | null,
+      website?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncDistrictsQueryVariables = {
+  filter?: ModelDistrictFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncDistrictsQuery = {
+  syncDistricts?:  {
+    __typename: "ModelDistrictConnection",
+    items:  Array< {
+      __typename: "District",
+      id: string,
+      lea_id: number,
+      name?: string | null,
+      address?: string | null,
+      city?: string | null,
+      logos?: string | null,
+      website?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -521,12 +863,19 @@ export type GetBlogQuery = {
         title: string,
         createdAt: string,
         updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         blogPostsId?: string | null,
       } | null >,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -546,11 +895,46 @@ export type ListBlogsQuery = {
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncBlogsQueryVariables = {
+  filter?: ModelBlogFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncBlogsQuery = {
+  syncBlogs?:  {
+    __typename: "ModelBlogConnection",
+    items:  Array< {
+      __typename: "Blog",
+      id: string,
+      name: string,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -570,9 +954,13 @@ export type GetPostQuery = {
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     comments?:  {
       __typename: "ModelCommentConnection",
@@ -582,12 +970,19 @@ export type GetPostQuery = {
         content: string,
         createdAt: string,
         updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         postCommentsId?: string | null,
       } | null >,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     blogPostsId?: string | null,
   } | null,
 };
@@ -611,16 +1006,65 @@ export type ListPostsQuery = {
         name: string,
         createdAt: string,
         updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       comments?:  {
         __typename: "ModelCommentConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       blogPostsId?: string | null,
     } | null >,
     nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncPostsQueryVariables = {
+  filter?: ModelPostFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncPostsQuery = {
+  syncPosts?:  {
+    __typename: "ModelPostConnection",
+    items:  Array< {
+      __typename: "Post",
+      id: string,
+      title: string,
+      blog?:  {
+        __typename: "Blog",
+        id: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      } | null,
+      comments?:  {
+        __typename: "ModelCommentConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      blogPostsId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -642,18 +1086,28 @@ export type GetCommentQuery = {
         name: string,
         createdAt: string,
         updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       comments?:  {
         __typename: "ModelCommentConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       blogPostsId?: string | null,
     } | null,
     content: string,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     postCommentsId?: string | null,
   } | null,
 };
@@ -676,14 +1130,112 @@ export type ListCommentsQuery = {
         title: string,
         createdAt: string,
         updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         blogPostsId?: string | null,
       } | null,
       content: string,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       postCommentsId?: string | null,
     } | null >,
     nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncCommentsQueryVariables = {
+  filter?: ModelCommentFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncCommentsQuery = {
+  syncComments?:  {
+    __typename: "ModelCommentConnection",
+    items:  Array< {
+      __typename: "Comment",
+      id: string,
+      post?:  {
+        __typename: "Post",
+        id: string,
+        title: string,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        blogPostsId?: string | null,
+      } | null,
+      content: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      postCommentsId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type OnCreateDistrictSubscription = {
+  onCreateDistrict?:  {
+    __typename: "District",
+    id: string,
+    lea_id: number,
+    name?: string | null,
+    address?: string | null,
+    city?: string | null,
+    logos?: string | null,
+    website?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnUpdateDistrictSubscription = {
+  onUpdateDistrict?:  {
+    __typename: "District",
+    id: string,
+    lea_id: number,
+    name?: string | null,
+    address?: string | null,
+    city?: string | null,
+    logos?: string | null,
+    website?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnDeleteDistrictSubscription = {
+  onDeleteDistrict?:  {
+    __typename: "District",
+    id: string,
+    lea_id: number,
+    name?: string | null,
+    address?: string | null,
+    city?: string | null,
+    logos?: string | null,
+    website?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -700,12 +1252,19 @@ export type OnCreateBlogSubscription = {
         title: string,
         createdAt: string,
         updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         blogPostsId?: string | null,
       } | null >,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -722,12 +1281,19 @@ export type OnUpdateBlogSubscription = {
         title: string,
         createdAt: string,
         updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         blogPostsId?: string | null,
       } | null >,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -744,12 +1310,19 @@ export type OnDeleteBlogSubscription = {
         title: string,
         createdAt: string,
         updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         blogPostsId?: string | null,
       } | null >,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -765,9 +1338,13 @@ export type OnCreatePostSubscription = {
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     comments?:  {
       __typename: "ModelCommentConnection",
@@ -777,12 +1354,19 @@ export type OnCreatePostSubscription = {
         content: string,
         createdAt: string,
         updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         postCommentsId?: string | null,
       } | null >,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     blogPostsId?: string | null,
   } | null,
 };
@@ -799,9 +1383,13 @@ export type OnUpdatePostSubscription = {
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     comments?:  {
       __typename: "ModelCommentConnection",
@@ -811,12 +1399,19 @@ export type OnUpdatePostSubscription = {
         content: string,
         createdAt: string,
         updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         postCommentsId?: string | null,
       } | null >,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     blogPostsId?: string | null,
   } | null,
 };
@@ -833,9 +1428,13 @@ export type OnDeletePostSubscription = {
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     comments?:  {
       __typename: "ModelCommentConnection",
@@ -845,12 +1444,19 @@ export type OnDeletePostSubscription = {
         content: string,
         createdAt: string,
         updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         postCommentsId?: string | null,
       } | null >,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     blogPostsId?: string | null,
   } | null,
 };
@@ -869,18 +1475,28 @@ export type OnCreateCommentSubscription = {
         name: string,
         createdAt: string,
         updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       comments?:  {
         __typename: "ModelCommentConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       blogPostsId?: string | null,
     } | null,
     content: string,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     postCommentsId?: string | null,
   } | null,
 };
@@ -899,18 +1515,28 @@ export type OnUpdateCommentSubscription = {
         name: string,
         createdAt: string,
         updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       comments?:  {
         __typename: "ModelCommentConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       blogPostsId?: string | null,
     } | null,
     content: string,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     postCommentsId?: string | null,
   } | null,
 };
@@ -929,18 +1555,28 @@ export type OnDeleteCommentSubscription = {
         name: string,
         createdAt: string,
         updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       comments?:  {
         __typename: "ModelCommentConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       blogPostsId?: string | null,
     } | null,
     content: string,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     postCommentsId?: string | null,
   } | null,
 };

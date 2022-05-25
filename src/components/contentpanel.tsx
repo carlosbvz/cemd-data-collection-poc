@@ -1,6 +1,6 @@
 import React from "react";
 import { Typography } from "@mui/material";
-import CustomDataGrid from "../components/datagrid";
+import CustomDataGrid from "./CustomDataGrid";
 
 type Props = {
   type: string;
