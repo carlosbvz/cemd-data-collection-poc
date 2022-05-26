@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import DistrictService from "../services/DistrictService";
-import * as queries from '../graphql/queries';
-import { API, graphqlOperation } from 'aws-amplify';
-import { createDistrict, updateDistrict} from '../graphql/mutations';
+import * as queries from "../graphql/queries";
+import { API, graphqlOperation } from "aws-amplify";
+import { createDistrict, updateDistrict } from "../graphql/mutations";
 
 const cache = {};
 
@@ -45,12 +45,14 @@ const districtColumns: GridColDef[] = [
   },
 ];
 
-function getTableData({type, cemdAPIDataItems, overridesDataItems}) {
+function getTableData({ type, cemdAPIDataItems, overridesDataItems }) {
   switch (type) {
     case "district":
       // Merge
       const mergedData = cemdAPIDataItems?.map((item) => {
-        const overrideItem = overridesDataItems.find((overrideItem) => overrideItem.lea_id === item.id);
+        const overrideItem = overridesDataItems.find(
+          (overrideItem) => overrideItem.lea_id === item.id
+        );
         // This is not a nice algorithm, but it works for now
         if (overrideItem) {
           return {
@@ -59,7 +61,7 @@ function getTableData({type, cemdAPIDataItems, overridesDataItems}) {
             address: overrideItem.address || item.address,
             city: overrideItem.city || item.city,
             logos: overrideItem.logos || item.logos,
-            website: overrideItem.website || item.website
+            website: overrideItem.website || item.website,
           };
         }
         return item;
@@ -91,16 +93,32 @@ export default function DistrictsDataGrid({ type }) {
   // Loading Data
   useEffect(() => {
     const loadData = async () => {
-      // Get CEMD API Data
-      const apiData = await districtService.getDistricts() as any;
-      const cemdAPIDataItems = apiData?.results;
-      // Get Overrides Data
-      const overrides = await API.graphql({ query: queries.listDistricts }) as any;
-      const overridesDataItems = overrides.data.listDistricts.items as any[];
-      // Get Merge
-      const data = cache[type] || (getTableData({type, cemdAPIDataItems, overridesDataItems}));
-      // Cache
-      cache[type] = data;
+
+      let data, cemdAPIDataItems, overridesDataItems;
+
+      if (cache[type]) {
+        data = cache[type].data;
+        cemdAPIDataItems = cache[type].cemdAPIDataItems;
+        overridesDataItems = cache[type].overridesDataItems;
+      } else {
+        // Get CEMD API Data
+        const apiData = (await districtService.getDistricts()) as any;
+        cemdAPIDataItems = apiData?.results;
+        // Get Overrides Data
+        const overrides = (await API.graphql({
+          query: queries.listDistricts,
+        })) as any;
+        overridesDataItems = overrides.data.listDistricts.items as any[];
+        // Get Merge
+        data = getTableData({ type, cemdAPIDataItems, overridesDataItems });
+        // Cache
+        cache[type] = {
+          data,
+          cemdAPIDataItems,
+          overridesDataItems,
+        };
+      }
+
       // Set State
       setMergedData({
         rows: data[0],
@@ -116,24 +134,35 @@ export default function DistrictsDataGrid({ type }) {
   const handleOnItemChange = async (data) => {
     try {
       const item = {
-        lea_id: data.id
+        lea_id: data.id,
       };
       item[data.field] = data.value;
 
-      const existingItem = overridesData.find((item) => item.lea_id === data.id);
+      const existingItem = overridesData.find(
+        (item) => item.lea_id === data.id
+      );
 
       // Update
       if (existingItem && existingItem?.lea_id) {
         // Need to get the item newest version
-        const district = await API.graphql({ query: queries.getDistrict, variables: { lea_id: existingItem?.lea_id }}) as any;
+        const district = (await API.graphql({
+          query: queries.getDistrict,
+          variables: { lea_id: existingItem?.lea_id },
+        })) as any;
         const districtItem = district?.data?.getDistrict;
         // Using latest item
-        const input = { lea_id: districtItem?.lea_id, _version: districtItem._version, ...item };
-        // Updating... 
+        const input = {
+          lea_id: districtItem?.lea_id,
+          _version: districtItem._version,
+          ...item,
+        };
+        // Updating...
         await API.graphql(graphqlOperation(updateDistrict, { input }));
-      // Create
+        // Create
       } else {
-        const newItem = await API.graphql(graphqlOperation(createDistrict, {input: item})) as any;
+        const newItem = (await API.graphql(
+          graphqlOperation(createDistrict, { input: item })
+        )) as any;
         setOverridesData([...overridesData, newItem.data.createDistrict]);
       }
     } catch (err) {
@@ -143,18 +172,15 @@ export default function DistrictsDataGrid({ type }) {
 
   if (loading) {
     return (
-      <Box sx={{ display: 'flex' }}>
+      <Box sx={{ display: "flex" }}>
         <CircularProgress />
       </Box>
     );
   }
 
-
   if (!mergedData?.columns || !mergedData?.rows) {
     return null;
   }
-
-
 
   return (
     <div style={{ height: 640, width: "100%" }}>
