@@ -119,13 +119,13 @@ export default function CustomDataGrid({ type }) {
       const existingItem = overridesData.find((item) => item.lea_id === data.id);
 
       // Update
-      if (existingItem && existingItem?.id) {
+      if (existingItem && existingItem?.lea_id) {
         // Need to get the item newest version
-        const district = await API.graphql({ query: queries.getDistrict, variables: { id: existingItem?.id }}) as any;
+        const district = await API.graphql({ query: queries.getDistrict, variables: { lea_id: existingItem?.lea_id }}) as any;
         const districtItem = district?.data?.getDistrict;
         debugger
         // Using latest item
-        const input = { id: districtItem?.id, _version: districtItem._version, ...item };
+        const input = { lea_id: districtItem?.lea_id, _version: districtItem._version, ...item };
         // Updating... 
         await API.graphql(graphqlOperation(updateDistrict, { input }));
       // Create

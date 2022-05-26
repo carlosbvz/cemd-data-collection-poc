@@ -1,6 +1,5 @@
-type District @model @auth(rules:[{allow: public}]) {
-  id: ID!
-  lea_id: Int!
+type District @model @auth(rules: [{ allow: public }]) {
+  lea_id: Int! @primaryKey
   name: String
   address: String
   city: String
@@ -8,22 +7,23 @@ type District @model @auth(rules:[{allow: public}]) {
   website: String
 }
 
-type Blog @model @auth(rules: [{allow: public}]) {
+type User @model @auth(rules: [{ allow: public }]) {
   id: ID!
-  name: String!
-  posts: [Post] @hasMany
+  name: String
+  email: String
+  tasks: [Task] @hasMany
 }
 
-type Post @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  title: String!
-  blog: Blog @belongsTo
-  comments: [Comment] @hasMany
+enum TaskStatus {
+  DONE
+  PENDING
 }
-
-type Comment @model @auth(rules: [{allow: public}]) {
+type Task @model @auth(rules: [{ allow: public }]) {
   id: ID!
-  post: Post @belongsTo
-  content: String!
+  title: String
+  description: String
+  due_date: AWSDate
+  status: TaskStatus
+  district_id: Int
+  user: User @belongsTo
 }
- 

@@ -8,7 +8,6 @@ export const createDistrict = /* GraphQL */ `
     $condition: ModelDistrictConditionInput
   ) {
     createDistrict(input: $input, condition: $condition) {
-      id
       lea_id
       name
       address
@@ -29,7 +28,6 @@ export const updateDistrict = /* GraphQL */ `
     $condition: ModelDistrictConditionInput
   ) {
     updateDistrict(input: $input, condition: $condition) {
-      id
       lea_id
       name
       address
@@ -50,7 +48,6 @@ export const deleteDistrict = /* GraphQL */ `
     $condition: ModelDistrictConditionInput
   ) {
     deleteDistrict(input: $input, condition: $condition) {
-      id
       lea_id
       name
       address
@@ -65,24 +62,29 @@ export const deleteDistrict = /* GraphQL */ `
     }
   }
 `;
-export const createBlog = /* GraphQL */ `
-  mutation CreateBlog(
-    $input: CreateBlogInput!
-    $condition: ModelBlogConditionInput
+export const createUser = /* GraphQL */ `
+  mutation CreateUser(
+    $input: CreateUserInput!
+    $condition: ModelUserConditionInput
   ) {
-    createBlog(input: $input, condition: $condition) {
+    createUser(input: $input, condition: $condition) {
       id
       name
-      posts {
+      email
+      tasks {
         items {
           id
           title
+          description
+          due_date
+          status
+          district_id
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          blogPostsId
+          userTasksId
         }
         nextToken
         startedAt
@@ -95,24 +97,29 @@ export const createBlog = /* GraphQL */ `
     }
   }
 `;
-export const updateBlog = /* GraphQL */ `
-  mutation UpdateBlog(
-    $input: UpdateBlogInput!
-    $condition: ModelBlogConditionInput
+export const updateUser = /* GraphQL */ `
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
   ) {
-    updateBlog(input: $input, condition: $condition) {
+    updateUser(input: $input, condition: $condition) {
       id
       name
-      posts {
+      email
+      tasks {
         items {
           id
           title
+          description
+          due_date
+          status
+          district_id
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          blogPostsId
+          userTasksId
         }
         nextToken
         startedAt
@@ -125,24 +132,29 @@ export const updateBlog = /* GraphQL */ `
     }
   }
 `;
-export const deleteBlog = /* GraphQL */ `
-  mutation DeleteBlog(
-    $input: DeleteBlogInput!
-    $condition: ModelBlogConditionInput
+export const deleteUser = /* GraphQL */ `
+  mutation DeleteUser(
+    $input: DeleteUserInput!
+    $condition: ModelUserConditionInput
   ) {
-    deleteBlog(input: $input, condition: $condition) {
+    deleteUser(input: $input, condition: $condition) {
       id
       name
-      posts {
+      email
+      tasks {
         items {
           id
           title
+          description
+          due_date
+          status
+          district_id
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          blogPostsId
+          userTasksId
         }
         nextToken
         startedAt
@@ -155,18 +167,23 @@ export const deleteBlog = /* GraphQL */ `
     }
   }
 `;
-export const createPost = /* GraphQL */ `
-  mutation CreatePost(
-    $input: CreatePostInput!
-    $condition: ModelPostConditionInput
+export const createTask = /* GraphQL */ `
+  mutation CreateTask(
+    $input: CreateTaskInput!
+    $condition: ModelTaskConditionInput
   ) {
-    createPost(input: $input, condition: $condition) {
+    createTask(input: $input, condition: $condition) {
       id
       title
-      blog {
+      description
+      due_date
+      status
+      district_id
+      user {
         id
         name
-        posts {
+        email
+        tasks {
           nextToken
           startedAt
         }
@@ -176,41 +193,32 @@ export const createPost = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
-      comments {
-        items {
-          id
-          content
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          postCommentsId
-        }
-        nextToken
-        startedAt
-      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      blogPostsId
+      userTasksId
     }
   }
 `;
-export const updatePost = /* GraphQL */ `
-  mutation UpdatePost(
-    $input: UpdatePostInput!
-    $condition: ModelPostConditionInput
+export const updateTask = /* GraphQL */ `
+  mutation UpdateTask(
+    $input: UpdateTaskInput!
+    $condition: ModelTaskConditionInput
   ) {
-    updatePost(input: $input, condition: $condition) {
+    updateTask(input: $input, condition: $condition) {
       id
       title
-      blog {
+      description
+      due_date
+      status
+      district_id
+      user {
         id
         name
-        posts {
+        email
+        tasks {
           nextToken
           startedAt
         }
@@ -220,41 +228,32 @@ export const updatePost = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
-      comments {
-        items {
-          id
-          content
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          postCommentsId
-        }
-        nextToken
-        startedAt
-      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      blogPostsId
+      userTasksId
     }
   }
 `;
-export const deletePost = /* GraphQL */ `
-  mutation DeletePost(
-    $input: DeletePostInput!
-    $condition: ModelPostConditionInput
+export const deleteTask = /* GraphQL */ `
+  mutation DeleteTask(
+    $input: DeleteTaskInput!
+    $condition: ModelTaskConditionInput
   ) {
-    deletePost(input: $input, condition: $condition) {
+    deleteTask(input: $input, condition: $condition) {
       id
       title
-      blog {
+      description
+      due_date
+      status
+      district_id
+      user {
         id
         name
-        posts {
+        email
+        tasks {
           nextToken
           startedAt
         }
@@ -264,146 +263,12 @@ export const deletePost = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
-      comments {
-        items {
-          id
-          content
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          postCommentsId
-        }
-        nextToken
-        startedAt
-      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      blogPostsId
-    }
-  }
-`;
-export const createComment = /* GraphQL */ `
-  mutation CreateComment(
-    $input: CreateCommentInput!
-    $condition: ModelCommentConditionInput
-  ) {
-    createComment(input: $input, condition: $condition) {
-      id
-      post {
-        id
-        title
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        comments {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        blogPostsId
-      }
-      content
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      postCommentsId
-    }
-  }
-`;
-export const updateComment = /* GraphQL */ `
-  mutation UpdateComment(
-    $input: UpdateCommentInput!
-    $condition: ModelCommentConditionInput
-  ) {
-    updateComment(input: $input, condition: $condition) {
-      id
-      post {
-        id
-        title
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        comments {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        blogPostsId
-      }
-      content
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      postCommentsId
-    }
-  }
-`;
-export const deleteComment = /* GraphQL */ `
-  mutation DeleteComment(
-    $input: DeleteCommentInput!
-    $condition: ModelCommentConditionInput
-  ) {
-    deleteComment(input: $input, condition: $condition) {
-      id
-      post {
-        id
-        title
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        comments {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        blogPostsId
-      }
-      content
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      postCommentsId
+      userTasksId
     }
   }
 `;

@@ -9,9 +9,7 @@ type Props = {
 const titles = {
   district: "District",
   products: "Products",
-  "tasks-all": "All Tasks",
-  "tasks-by-manager": "Tasks By Manager",
-  "tasks-by-collector": "Tasks By Collector",
+  tasks: "All Tasks",
 }
 
 export default function Contentpanel({ type }: Props) {

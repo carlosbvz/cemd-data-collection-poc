@@ -1,6 +1,6 @@
 projects:
   cemddatacollectionpo:
-    schemaPath: src/graphql/schema.json
+    schemaPath: amplify/backend/api/cemddatacollectionpo/build/schema.graphql
     includes:
       - src/graphql/**/*.ts
     excludes:

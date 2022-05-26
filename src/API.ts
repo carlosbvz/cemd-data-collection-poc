@@ -3,7 +3,6 @@
 //  This file was automatically generated and should not be edited.
 
 export type CreateDistrictInput = {
-  id?: string | null,
   lea_id: number,
   name?: string | null,
   address?: string | null,
@@ -14,7 +13,6 @@ export type CreateDistrictInput = {
 };
 
 export type ModelDistrictConditionInput = {
-  lea_id?: ModelIntInput | null,
   name?: ModelStringInput | null,
   address?: ModelStringInput | null,
   city?: ModelStringInput | null,
@@ -24,32 +22,6 @@ export type ModelDistrictConditionInput = {
   or?: Array< ModelDistrictConditionInput | null > | null,
   not?: ModelDistrictConditionInput | null,
 };
-
-export type ModelIntInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-};
-
-export enum ModelAttributeTypes {
-  binary = "binary",
-  binarySet = "binarySet",
-  bool = "bool",
-  list = "list",
-  map = "map",
-  number = "number",
-  numberSet = "numberSet",
-  string = "string",
-  stringSet = "stringSet",
-  _null = "_null",
-}
-
 
 export type ModelStringInput = {
   ne?: string | null,
@@ -67,6 +39,20 @@ export type ModelStringInput = {
   size?: ModelSizeInput | null,
 };
 
+export enum ModelAttributeTypes {
+  binary = "binary",
+  binarySet = "binarySet",
+  bool = "bool",
+  list = "list",
+  map = "map",
+  number = "number",
+  numberSet = "numberSet",
+  string = "string",
+  stringSet = "stringSet",
+  _null = "_null",
+}
+
+
 export type ModelSizeInput = {
   ne?: number | null,
   eq?: number | null,
@@ -79,7 +65,6 @@ export type ModelSizeInput = {
 
 export type District = {
   __typename: "District",
-  id: string,
   lea_id: number,
   name?: string | null,
   address?: string | null,
@@ -94,8 +79,7 @@ export type District = {
 };
 
 export type UpdateDistrictInput = {
-  id: string,
-  lea_id?: number | null,
+  lea_id: number,
   name?: string | null,
   address?: string | null,
   city?: string | null,
@@ -105,100 +89,118 @@ export type UpdateDistrictInput = {
 };
 
 export type DeleteDistrictInput = {
-  id: string,
+  lea_id: number,
   _version?: number | null,
 };
 
-export type CreateBlogInput = {
+export type CreateUserInput = {
   id?: string | null,
-  name: string,
+  name?: string | null,
+  email?: string | null,
   _version?: number | null,
 };
 
-export type ModelBlogConditionInput = {
+export type ModelUserConditionInput = {
   name?: ModelStringInput | null,
-  and?: Array< ModelBlogConditionInput | null > | null,
-  or?: Array< ModelBlogConditionInput | null > | null,
-  not?: ModelBlogConditionInput | null,
+  email?: ModelStringInput | null,
+  and?: Array< ModelUserConditionInput | null > | null,
+  or?: Array< ModelUserConditionInput | null > | null,
+  not?: ModelUserConditionInput | null,
 };
 
-export type Blog = {
-  __typename: "Blog",
-  id: string,
-  name: string,
-  posts?: ModelPostConnection | null,
-  createdAt: string,
-  updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
-};
-
-export type ModelPostConnection = {
-  __typename: "ModelPostConnection",
-  items:  Array<Post | null >,
-  nextToken?: string | null,
-  startedAt?: number | null,
-};
-
-export type Post = {
-  __typename: "Post",
-  id: string,
-  title: string,
-  blog?: Blog | null,
-  comments?: ModelCommentConnection | null,
-  createdAt: string,
-  updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
-  blogPostsId?: string | null,
-};
-
-export type ModelCommentConnection = {
-  __typename: "ModelCommentConnection",
-  items:  Array<Comment | null >,
-  nextToken?: string | null,
-  startedAt?: number | null,
-};
-
-export type Comment = {
-  __typename: "Comment",
-  id: string,
-  post?: Post | null,
-  content: string,
-  createdAt: string,
-  updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
-  postCommentsId?: string | null,
-};
-
-export type UpdateBlogInput = {
+export type User = {
+  __typename: "User",
   id: string,
   name?: string | null,
+  email?: string | null,
+  tasks?: ModelTaskConnection | null,
+  createdAt: string,
+  updatedAt: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+};
+
+export type ModelTaskConnection = {
+  __typename: "ModelTaskConnection",
+  items:  Array<Task | null >,
+  nextToken?: string | null,
+  startedAt?: number | null,
+};
+
+export type Task = {
+  __typename: "Task",
+  id: string,
+  title?: string | null,
+  description?: string | null,
+  due_date?: string | null,
+  status?: TaskStatus | null,
+  district_id?: number | null,
+  user?: User | null,
+  createdAt: string,
+  updatedAt: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+  userTasksId?: string | null,
+};
+
+export enum TaskStatus {
+  DONE = "DONE",
+  PENDING = "PENDING",
+}
+
+
+export type UpdateUserInput = {
+  id: string,
+  name?: string | null,
+  email?: string | null,
   _version?: number | null,
 };
 
-export type DeleteBlogInput = {
+export type DeleteUserInput = {
   id: string,
   _version?: number | null,
 };
 
-export type CreatePostInput = {
+export type CreateTaskInput = {
   id?: string | null,
-  title: string,
+  title?: string | null,
+  description?: string | null,
+  due_date?: string | null,
+  status?: TaskStatus | null,
+  district_id?: number | null,
   _version?: number | null,
-  blogPostsId?: string | null,
+  userTasksId?: string | null,
 };
 
-export type ModelPostConditionInput = {
+export type ModelTaskConditionInput = {
   title?: ModelStringInput | null,
-  and?: Array< ModelPostConditionInput | null > | null,
-  or?: Array< ModelPostConditionInput | null > | null,
-  not?: ModelPostConditionInput | null,
-  blogPostsId?: ModelIDInput | null,
+  description?: ModelStringInput | null,
+  due_date?: ModelStringInput | null,
+  status?: ModelTaskStatusInput | null,
+  district_id?: ModelIntInput | null,
+  and?: Array< ModelTaskConditionInput | null > | null,
+  or?: Array< ModelTaskConditionInput | null > | null,
+  not?: ModelTaskConditionInput | null,
+  userTasksId?: ModelIDInput | null,
+};
+
+export type ModelTaskStatusInput = {
+  eq?: TaskStatus | null,
+  ne?: TaskStatus | null,
+};
+
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
 };
 
 export type ModelIDInput = {
@@ -217,47 +219,23 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type UpdatePostInput = {
+export type UpdateTaskInput = {
   id: string,
   title?: string | null,
+  description?: string | null,
+  due_date?: string | null,
+  status?: TaskStatus | null,
+  district_id?: number | null,
   _version?: number | null,
-  blogPostsId?: string | null,
+  userTasksId?: string | null,
 };
 
-export type DeletePostInput = {
-  id: string,
-  _version?: number | null,
-};
-
-export type CreateCommentInput = {
-  id?: string | null,
-  content: string,
-  _version?: number | null,
-  postCommentsId?: string | null,
-};
-
-export type ModelCommentConditionInput = {
-  content?: ModelStringInput | null,
-  and?: Array< ModelCommentConditionInput | null > | null,
-  or?: Array< ModelCommentConditionInput | null > | null,
-  not?: ModelCommentConditionInput | null,
-  postCommentsId?: ModelIDInput | null,
-};
-
-export type UpdateCommentInput = {
-  id: string,
-  content?: string | null,
-  _version?: number | null,
-  postCommentsId?: string | null,
-};
-
-export type DeleteCommentInput = {
+export type DeleteTaskInput = {
   id: string,
   _version?: number | null,
 };
 
 export type ModelDistrictFilterInput = {
-  id?: ModelIDInput | null,
   lea_id?: ModelIntInput | null,
   name?: ModelStringInput | null,
   address?: ModelStringInput | null,
@@ -269,6 +247,12 @@ export type ModelDistrictFilterInput = {
   not?: ModelDistrictFilterInput | null,
 };
 
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
+
 export type ModelDistrictConnection = {
   __typename: "ModelDistrictConnection",
   items:  Array<District | null >,
@@ -276,37 +260,33 @@ export type ModelDistrictConnection = {
   startedAt?: number | null,
 };
 
-export type ModelBlogFilterInput = {
+export type ModelUserFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
-  and?: Array< ModelBlogFilterInput | null > | null,
-  or?: Array< ModelBlogFilterInput | null > | null,
-  not?: ModelBlogFilterInput | null,
+  email?: ModelStringInput | null,
+  and?: Array< ModelUserFilterInput | null > | null,
+  or?: Array< ModelUserFilterInput | null > | null,
+  not?: ModelUserFilterInput | null,
 };
 
-export type ModelBlogConnection = {
-  __typename: "ModelBlogConnection",
-  items:  Array<Blog | null >,
+export type ModelUserConnection = {
+  __typename: "ModelUserConnection",
+  items:  Array<User | null >,
   nextToken?: string | null,
   startedAt?: number | null,
 };
 
-export type ModelPostFilterInput = {
+export type ModelTaskFilterInput = {
   id?: ModelIDInput | null,
   title?: ModelStringInput | null,
-  and?: Array< ModelPostFilterInput | null > | null,
-  or?: Array< ModelPostFilterInput | null > | null,
-  not?: ModelPostFilterInput | null,
-  blogPostsId?: ModelIDInput | null,
-};
-
-export type ModelCommentFilterInput = {
-  id?: ModelIDInput | null,
-  content?: ModelStringInput | null,
-  and?: Array< ModelCommentFilterInput | null > | null,
-  or?: Array< ModelCommentFilterInput | null > | null,
-  not?: ModelCommentFilterInput | null,
-  postCommentsId?: ModelIDInput | null,
+  description?: ModelStringInput | null,
+  due_date?: ModelStringInput | null,
+  status?: ModelTaskStatusInput | null,
+  district_id?: ModelIntInput | null,
+  and?: Array< ModelTaskFilterInput | null > | null,
+  or?: Array< ModelTaskFilterInput | null > | null,
+  not?: ModelTaskFilterInput | null,
+  userTasksId?: ModelIDInput | null,
 };
 
 export type CreateDistrictMutationVariables = {
@@ -317,7 +297,6 @@ export type CreateDistrictMutationVariables = {
 export type CreateDistrictMutation = {
   createDistrict?:  {
     __typename: "District",
-    id: string,
     lea_id: number,
     name?: string | null,
     address?: string | null,
@@ -340,7 +319,6 @@ export type UpdateDistrictMutationVariables = {
 export type UpdateDistrictMutation = {
   updateDistrict?:  {
     __typename: "District",
-    id: string,
     lea_id: number,
     name?: string | null,
     address?: string | null,
@@ -363,7 +341,6 @@ export type DeleteDistrictMutationVariables = {
 export type DeleteDistrictMutation = {
   deleteDistrict?:  {
     __typename: "District",
-    id: string,
     lea_id: number,
     name?: string | null,
     address?: string | null,
@@ -378,28 +355,33 @@ export type DeleteDistrictMutation = {
   } | null,
 };
 
-export type CreateBlogMutationVariables = {
-  input: CreateBlogInput,
-  condition?: ModelBlogConditionInput | null,
+export type CreateUserMutationVariables = {
+  input: CreateUserInput,
+  condition?: ModelUserConditionInput | null,
 };
 
-export type CreateBlogMutation = {
-  createBlog?:  {
-    __typename: "Blog",
+export type CreateUserMutation = {
+  createUser?:  {
+    __typename: "User",
     id: string,
-    name: string,
-    posts?:  {
-      __typename: "ModelPostConnection",
+    name?: string | null,
+    email?: string | null,
+    tasks?:  {
+      __typename: "ModelTaskConnection",
       items:  Array< {
-        __typename: "Post",
+        __typename: "Task",
         id: string,
-        title: string,
+        title?: string | null,
+        description?: string | null,
+        due_date?: string | null,
+        status?: TaskStatus | null,
+        district_id?: number | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
         _deleted?: boolean | null,
         _lastChangedAt: number,
-        blogPostsId?: string | null,
+        userTasksId?: string | null,
       } | null >,
       nextToken?: string | null,
       startedAt?: number | null,
@@ -412,28 +394,33 @@ export type CreateBlogMutation = {
   } | null,
 };
 
-export type UpdateBlogMutationVariables = {
-  input: UpdateBlogInput,
-  condition?: ModelBlogConditionInput | null,
+export type UpdateUserMutationVariables = {
+  input: UpdateUserInput,
+  condition?: ModelUserConditionInput | null,
 };
 
-export type UpdateBlogMutation = {
-  updateBlog?:  {
-    __typename: "Blog",
+export type UpdateUserMutation = {
+  updateUser?:  {
+    __typename: "User",
     id: string,
-    name: string,
-    posts?:  {
-      __typename: "ModelPostConnection",
+    name?: string | null,
+    email?: string | null,
+    tasks?:  {
+      __typename: "ModelTaskConnection",
       items:  Array< {
-        __typename: "Post",
+        __typename: "Task",
         id: string,
-        title: string,
+        title?: string | null,
+        description?: string | null,
+        due_date?: string | null,
+        status?: TaskStatus | null,
+        district_id?: number | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
         _deleted?: boolean | null,
         _lastChangedAt: number,
-        blogPostsId?: string | null,
+        userTasksId?: string | null,
       } | null >,
       nextToken?: string | null,
       startedAt?: number | null,
@@ -446,28 +433,33 @@ export type UpdateBlogMutation = {
   } | null,
 };
 
-export type DeleteBlogMutationVariables = {
-  input: DeleteBlogInput,
-  condition?: ModelBlogConditionInput | null,
+export type DeleteUserMutationVariables = {
+  input: DeleteUserInput,
+  condition?: ModelUserConditionInput | null,
 };
 
-export type DeleteBlogMutation = {
-  deleteBlog?:  {
-    __typename: "Blog",
+export type DeleteUserMutation = {
+  deleteUser?:  {
+    __typename: "User",
     id: string,
-    name: string,
-    posts?:  {
-      __typename: "ModelPostConnection",
+    name?: string | null,
+    email?: string | null,
+    tasks?:  {
+      __typename: "ModelTaskConnection",
       items:  Array< {
-        __typename: "Post",
+        __typename: "Task",
         id: string,
-        title: string,
+        title?: string | null,
+        description?: string | null,
+        due_date?: string | null,
+        status?: TaskStatus | null,
+        district_id?: number | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
         _deleted?: boolean | null,
         _lastChangedAt: number,
-        blogPostsId?: string | null,
+        userTasksId?: string | null,
       } | null >,
       nextToken?: string | null,
       startedAt?: number | null,
@@ -480,22 +472,27 @@ export type DeleteBlogMutation = {
   } | null,
 };
 
-export type CreatePostMutationVariables = {
-  input: CreatePostInput,
-  condition?: ModelPostConditionInput | null,
+export type CreateTaskMutationVariables = {
+  input: CreateTaskInput,
+  condition?: ModelTaskConditionInput | null,
 };
 
-export type CreatePostMutation = {
-  createPost?:  {
-    __typename: "Post",
+export type CreateTaskMutation = {
+  createTask?:  {
+    __typename: "Task",
     id: string,
-    title: string,
-    blog?:  {
-      __typename: "Blog",
+    title?: string | null,
+    description?: string | null,
+    due_date?: string | null,
+    status?: TaskStatus | null,
+    district_id?: number | null,
+    user?:  {
+      __typename: "User",
       id: string,
-      name: string,
-      posts?:  {
-        __typename: "ModelPostConnection",
+      name?: string | null,
+      email?: string | null,
+      tasks?:  {
+        __typename: "ModelTaskConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -505,47 +502,36 @@ export type CreatePostMutation = {
       _deleted?: boolean | null,
       _lastChangedAt: number,
     } | null,
-    comments?:  {
-      __typename: "ModelCommentConnection",
-      items:  Array< {
-        __typename: "Comment",
-        id: string,
-        content: string,
-        createdAt: string,
-        updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        postCommentsId?: string | null,
-      } | null >,
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
-    blogPostsId?: string | null,
+    userTasksId?: string | null,
   } | null,
 };
 
-export type UpdatePostMutationVariables = {
-  input: UpdatePostInput,
-  condition?: ModelPostConditionInput | null,
+export type UpdateTaskMutationVariables = {
+  input: UpdateTaskInput,
+  condition?: ModelTaskConditionInput | null,
 };
 
-export type UpdatePostMutation = {
-  updatePost?:  {
-    __typename: "Post",
+export type UpdateTaskMutation = {
+  updateTask?:  {
+    __typename: "Task",
     id: string,
-    title: string,
-    blog?:  {
-      __typename: "Blog",
+    title?: string | null,
+    description?: string | null,
+    due_date?: string | null,
+    status?: TaskStatus | null,
+    district_id?: number | null,
+    user?:  {
+      __typename: "User",
       id: string,
-      name: string,
-      posts?:  {
-        __typename: "ModelPostConnection",
+      name?: string | null,
+      email?: string | null,
+      tasks?:  {
+        __typename: "ModelTaskConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -555,47 +541,36 @@ export type UpdatePostMutation = {
       _deleted?: boolean | null,
       _lastChangedAt: number,
     } | null,
-    comments?:  {
-      __typename: "ModelCommentConnection",
-      items:  Array< {
-        __typename: "Comment",
-        id: string,
-        content: string,
-        createdAt: string,
-        updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        postCommentsId?: string | null,
-      } | null >,
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
-    blogPostsId?: string | null,
+    userTasksId?: string | null,
   } | null,
 };
 
-export type DeletePostMutationVariables = {
-  input: DeletePostInput,
-  condition?: ModelPostConditionInput | null,
+export type DeleteTaskMutationVariables = {
+  input: DeleteTaskInput,
+  condition?: ModelTaskConditionInput | null,
 };
 
-export type DeletePostMutation = {
-  deletePost?:  {
-    __typename: "Post",
+export type DeleteTaskMutation = {
+  deleteTask?:  {
+    __typename: "Task",
     id: string,
-    title: string,
-    blog?:  {
-      __typename: "Blog",
+    title?: string | null,
+    description?: string | null,
+    due_date?: string | null,
+    status?: TaskStatus | null,
+    district_id?: number | null,
+    user?:  {
+      __typename: "User",
       id: string,
-      name: string,
-      posts?:  {
-        __typename: "ModelPostConnection",
+      name?: string | null,
+      email?: string | null,
+      tasks?:  {
+        __typename: "ModelTaskConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -605,174 +580,22 @@ export type DeletePostMutation = {
       _deleted?: boolean | null,
       _lastChangedAt: number,
     } | null,
-    comments?:  {
-      __typename: "ModelCommentConnection",
-      items:  Array< {
-        __typename: "Comment",
-        id: string,
-        content: string,
-        createdAt: string,
-        updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        postCommentsId?: string | null,
-      } | null >,
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
-    blogPostsId?: string | null,
-  } | null,
-};
-
-export type CreateCommentMutationVariables = {
-  input: CreateCommentInput,
-  condition?: ModelCommentConditionInput | null,
-};
-
-export type CreateCommentMutation = {
-  createComment?:  {
-    __typename: "Comment",
-    id: string,
-    post?:  {
-      __typename: "Post",
-      id: string,
-      title: string,
-      blog?:  {
-        __typename: "Blog",
-        id: string,
-        name: string,
-        createdAt: string,
-        updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-      } | null,
-      comments?:  {
-        __typename: "ModelCommentConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      blogPostsId?: string | null,
-    } | null,
-    content: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    postCommentsId?: string | null,
-  } | null,
-};
-
-export type UpdateCommentMutationVariables = {
-  input: UpdateCommentInput,
-  condition?: ModelCommentConditionInput | null,
-};
-
-export type UpdateCommentMutation = {
-  updateComment?:  {
-    __typename: "Comment",
-    id: string,
-    post?:  {
-      __typename: "Post",
-      id: string,
-      title: string,
-      blog?:  {
-        __typename: "Blog",
-        id: string,
-        name: string,
-        createdAt: string,
-        updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-      } | null,
-      comments?:  {
-        __typename: "ModelCommentConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      blogPostsId?: string | null,
-    } | null,
-    content: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    postCommentsId?: string | null,
-  } | null,
-};
-
-export type DeleteCommentMutationVariables = {
-  input: DeleteCommentInput,
-  condition?: ModelCommentConditionInput | null,
-};
-
-export type DeleteCommentMutation = {
-  deleteComment?:  {
-    __typename: "Comment",
-    id: string,
-    post?:  {
-      __typename: "Post",
-      id: string,
-      title: string,
-      blog?:  {
-        __typename: "Blog",
-        id: string,
-        name: string,
-        createdAt: string,
-        updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-      } | null,
-      comments?:  {
-        __typename: "ModelCommentConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      blogPostsId?: string | null,
-    } | null,
-    content: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    postCommentsId?: string | null,
+    userTasksId?: string | null,
   } | null,
 };
 
 export type GetDistrictQueryVariables = {
-  id: string,
+  lea_id: number,
 };
 
 export type GetDistrictQuery = {
   getDistrict?:  {
     __typename: "District",
-    id: string,
     lea_id: number,
     name?: string | null,
     address?: string | null,
@@ -788,9 +611,11 @@ export type GetDistrictQuery = {
 };
 
 export type ListDistrictsQueryVariables = {
+  lea_id?: number | null,
   filter?: ModelDistrictFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
 };
 
 export type ListDistrictsQuery = {
@@ -798,7 +623,6 @@ export type ListDistrictsQuery = {
     __typename: "ModelDistrictConnection",
     items:  Array< {
       __typename: "District",
-      id: string,
       lea_id: number,
       name?: string | null,
       address?: string | null,
@@ -828,7 +652,6 @@ export type SyncDistrictsQuery = {
     __typename: "ModelDistrictConnection",
     items:  Array< {
       __typename: "District",
-      id: string,
       lea_id: number,
       name?: string | null,
       address?: string | null,
@@ -846,27 +669,32 @@ export type SyncDistrictsQuery = {
   } | null,
 };
 
-export type GetBlogQueryVariables = {
+export type GetUserQueryVariables = {
   id: string,
 };
 
-export type GetBlogQuery = {
-  getBlog?:  {
-    __typename: "Blog",
+export type GetUserQuery = {
+  getUser?:  {
+    __typename: "User",
     id: string,
-    name: string,
-    posts?:  {
-      __typename: "ModelPostConnection",
+    name?: string | null,
+    email?: string | null,
+    tasks?:  {
+      __typename: "ModelTaskConnection",
       items:  Array< {
-        __typename: "Post",
+        __typename: "Task",
         id: string,
-        title: string,
+        title?: string | null,
+        description?: string | null,
+        due_date?: string | null,
+        status?: TaskStatus | null,
+        district_id?: number | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
         _deleted?: boolean | null,
         _lastChangedAt: number,
-        blogPostsId?: string | null,
+        userTasksId?: string | null,
       } | null >,
       nextToken?: string | null,
       startedAt?: number | null,
@@ -879,21 +707,22 @@ export type GetBlogQuery = {
   } | null,
 };
 
-export type ListBlogsQueryVariables = {
-  filter?: ModelBlogFilterInput | null,
+export type ListUsersQueryVariables = {
+  filter?: ModelUserFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListBlogsQuery = {
-  listBlogs?:  {
-    __typename: "ModelBlogConnection",
+export type ListUsersQuery = {
+  listUsers?:  {
+    __typename: "ModelUserConnection",
     items:  Array< {
-      __typename: "Blog",
+      __typename: "User",
       id: string,
-      name: string,
-      posts?:  {
-        __typename: "ModelPostConnection",
+      name?: string | null,
+      email?: string | null,
+      tasks?:  {
+        __typename: "ModelTaskConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -908,22 +737,23 @@ export type ListBlogsQuery = {
   } | null,
 };
 
-export type SyncBlogsQueryVariables = {
-  filter?: ModelBlogFilterInput | null,
+export type SyncUsersQueryVariables = {
+  filter?: ModelUserFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
   lastSync?: number | null,
 };
 
-export type SyncBlogsQuery = {
-  syncBlogs?:  {
-    __typename: "ModelBlogConnection",
+export type SyncUsersQuery = {
+  syncUsers?:  {
+    __typename: "ModelUserConnection",
     items:  Array< {
-      __typename: "Blog",
+      __typename: "User",
       id: string,
-      name: string,
-      posts?:  {
-        __typename: "ModelPostConnection",
+      name?: string | null,
+      email?: string | null,
+      tasks?:  {
+        __typename: "ModelTaskConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -938,21 +768,26 @@ export type SyncBlogsQuery = {
   } | null,
 };
 
-export type GetPostQueryVariables = {
+export type GetTaskQueryVariables = {
   id: string,
 };
 
-export type GetPostQuery = {
-  getPost?:  {
-    __typename: "Post",
+export type GetTaskQuery = {
+  getTask?:  {
+    __typename: "Task",
     id: string,
-    title: string,
-    blog?:  {
-      __typename: "Blog",
+    title?: string | null,
+    description?: string | null,
+    due_date?: string | null,
+    status?: TaskStatus | null,
+    district_id?: number | null,
+    user?:  {
+      __typename: "User",
       id: string,
-      name: string,
-      posts?:  {
-        __typename: "ModelPostConnection",
+      name?: string | null,
+      email?: string | null,
+      tasks?:  {
+        __typename: "ModelTaskConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -961,224 +796,91 @@ export type GetPostQuery = {
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
-    } | null,
-    comments?:  {
-      __typename: "ModelCommentConnection",
-      items:  Array< {
-        __typename: "Comment",
-        id: string,
-        content: string,
-        createdAt: string,
-        updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        postCommentsId?: string | null,
-      } | null >,
-      nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
-    blogPostsId?: string | null,
+    userTasksId?: string | null,
   } | null,
 };
 
-export type ListPostsQueryVariables = {
-  filter?: ModelPostFilterInput | null,
+export type ListTasksQueryVariables = {
+  filter?: ModelTaskFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListPostsQuery = {
-  listPosts?:  {
-    __typename: "ModelPostConnection",
+export type ListTasksQuery = {
+  listTasks?:  {
+    __typename: "ModelTaskConnection",
     items:  Array< {
-      __typename: "Post",
+      __typename: "Task",
       id: string,
-      title: string,
-      blog?:  {
-        __typename: "Blog",
+      title?: string | null,
+      description?: string | null,
+      due_date?: string | null,
+      status?: TaskStatus | null,
+      district_id?: number | null,
+      user?:  {
+        __typename: "User",
         id: string,
-        name: string,
+        name?: string | null,
+        email?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
         _deleted?: boolean | null,
         _lastChangedAt: number,
       } | null,
-      comments?:  {
-        __typename: "ModelCommentConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
-      blogPostsId?: string | null,
+      userTasksId?: string | null,
     } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
   } | null,
 };
 
-export type SyncPostsQueryVariables = {
-  filter?: ModelPostFilterInput | null,
+export type SyncTasksQueryVariables = {
+  filter?: ModelTaskFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
   lastSync?: number | null,
 };
 
-export type SyncPostsQuery = {
-  syncPosts?:  {
-    __typename: "ModelPostConnection",
+export type SyncTasksQuery = {
+  syncTasks?:  {
+    __typename: "ModelTaskConnection",
     items:  Array< {
-      __typename: "Post",
+      __typename: "Task",
       id: string,
-      title: string,
-      blog?:  {
-        __typename: "Blog",
+      title?: string | null,
+      description?: string | null,
+      due_date?: string | null,
+      status?: TaskStatus | null,
+      district_id?: number | null,
+      user?:  {
+        __typename: "User",
         id: string,
-        name: string,
+        name?: string | null,
+        email?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
         _deleted?: boolean | null,
         _lastChangedAt: number,
       } | null,
-      comments?:  {
-        __typename: "ModelCommentConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
-      blogPostsId?: string | null,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type GetCommentQueryVariables = {
-  id: string,
-};
-
-export type GetCommentQuery = {
-  getComment?:  {
-    __typename: "Comment",
-    id: string,
-    post?:  {
-      __typename: "Post",
-      id: string,
-      title: string,
-      blog?:  {
-        __typename: "Blog",
-        id: string,
-        name: string,
-        createdAt: string,
-        updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-      } | null,
-      comments?:  {
-        __typename: "ModelCommentConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      blogPostsId?: string | null,
-    } | null,
-    content: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    postCommentsId?: string | null,
-  } | null,
-};
-
-export type ListCommentsQueryVariables = {
-  filter?: ModelCommentFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListCommentsQuery = {
-  listComments?:  {
-    __typename: "ModelCommentConnection",
-    items:  Array< {
-      __typename: "Comment",
-      id: string,
-      post?:  {
-        __typename: "Post",
-        id: string,
-        title: string,
-        createdAt: string,
-        updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        blogPostsId?: string | null,
-      } | null,
-      content: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      postCommentsId?: string | null,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncCommentsQueryVariables = {
-  filter?: ModelCommentFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncCommentsQuery = {
-  syncComments?:  {
-    __typename: "ModelCommentConnection",
-    items:  Array< {
-      __typename: "Comment",
-      id: string,
-      post?:  {
-        __typename: "Post",
-        id: string,
-        title: string,
-        createdAt: string,
-        updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        blogPostsId?: string | null,
-      } | null,
-      content: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      postCommentsId?: string | null,
+      userTasksId?: string | null,
     } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
@@ -1188,7 +890,6 @@ export type SyncCommentsQuery = {
 export type OnCreateDistrictSubscription = {
   onCreateDistrict?:  {
     __typename: "District",
-    id: string,
     lea_id: number,
     name?: string | null,
     address?: string | null,
@@ -1206,7 +907,6 @@ export type OnCreateDistrictSubscription = {
 export type OnUpdateDistrictSubscription = {
   onUpdateDistrict?:  {
     __typename: "District",
-    id: string,
     lea_id: number,
     name?: string | null,
     address?: string | null,
@@ -1224,7 +924,6 @@ export type OnUpdateDistrictSubscription = {
 export type OnDeleteDistrictSubscription = {
   onDeleteDistrict?:  {
     __typename: "District",
-    id: string,
     lea_id: number,
     name?: string | null,
     address?: string | null,
@@ -1239,23 +938,28 @@ export type OnDeleteDistrictSubscription = {
   } | null,
 };
 
-export type OnCreateBlogSubscription = {
-  onCreateBlog?:  {
-    __typename: "Blog",
+export type OnCreateUserSubscription = {
+  onCreateUser?:  {
+    __typename: "User",
     id: string,
-    name: string,
-    posts?:  {
-      __typename: "ModelPostConnection",
+    name?: string | null,
+    email?: string | null,
+    tasks?:  {
+      __typename: "ModelTaskConnection",
       items:  Array< {
-        __typename: "Post",
+        __typename: "Task",
         id: string,
-        title: string,
+        title?: string | null,
+        description?: string | null,
+        due_date?: string | null,
+        status?: TaskStatus | null,
+        district_id?: number | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
         _deleted?: boolean | null,
         _lastChangedAt: number,
-        blogPostsId?: string | null,
+        userTasksId?: string | null,
       } | null >,
       nextToken?: string | null,
       startedAt?: number | null,
@@ -1268,23 +972,28 @@ export type OnCreateBlogSubscription = {
   } | null,
 };
 
-export type OnUpdateBlogSubscription = {
-  onUpdateBlog?:  {
-    __typename: "Blog",
+export type OnUpdateUserSubscription = {
+  onUpdateUser?:  {
+    __typename: "User",
     id: string,
-    name: string,
-    posts?:  {
-      __typename: "ModelPostConnection",
+    name?: string | null,
+    email?: string | null,
+    tasks?:  {
+      __typename: "ModelTaskConnection",
       items:  Array< {
-        __typename: "Post",
+        __typename: "Task",
         id: string,
-        title: string,
+        title?: string | null,
+        description?: string | null,
+        due_date?: string | null,
+        status?: TaskStatus | null,
+        district_id?: number | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
         _deleted?: boolean | null,
         _lastChangedAt: number,
-        blogPostsId?: string | null,
+        userTasksId?: string | null,
       } | null >,
       nextToken?: string | null,
       startedAt?: number | null,
@@ -1297,23 +1006,28 @@ export type OnUpdateBlogSubscription = {
   } | null,
 };
 
-export type OnDeleteBlogSubscription = {
-  onDeleteBlog?:  {
-    __typename: "Blog",
+export type OnDeleteUserSubscription = {
+  onDeleteUser?:  {
+    __typename: "User",
     id: string,
-    name: string,
-    posts?:  {
-      __typename: "ModelPostConnection",
+    name?: string | null,
+    email?: string | null,
+    tasks?:  {
+      __typename: "ModelTaskConnection",
       items:  Array< {
-        __typename: "Post",
+        __typename: "Task",
         id: string,
-        title: string,
+        title?: string | null,
+        description?: string | null,
+        due_date?: string | null,
+        status?: TaskStatus | null,
+        district_id?: number | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
         _deleted?: boolean | null,
         _lastChangedAt: number,
-        blogPostsId?: string | null,
+        userTasksId?: string | null,
       } | null >,
       nextToken?: string | null,
       startedAt?: number | null,
@@ -1326,17 +1040,22 @@ export type OnDeleteBlogSubscription = {
   } | null,
 };
 
-export type OnCreatePostSubscription = {
-  onCreatePost?:  {
-    __typename: "Post",
+export type OnCreateTaskSubscription = {
+  onCreateTask?:  {
+    __typename: "Task",
     id: string,
-    title: string,
-    blog?:  {
-      __typename: "Blog",
+    title?: string | null,
+    description?: string | null,
+    due_date?: string | null,
+    status?: TaskStatus | null,
+    district_id?: number | null,
+    user?:  {
+      __typename: "User",
       id: string,
-      name: string,
-      posts?:  {
-        __typename: "ModelPostConnection",
+      name?: string | null,
+      email?: string | null,
+      tasks?:  {
+        __typename: "ModelTaskConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -1346,42 +1065,31 @@ export type OnCreatePostSubscription = {
       _deleted?: boolean | null,
       _lastChangedAt: number,
     } | null,
-    comments?:  {
-      __typename: "ModelCommentConnection",
-      items:  Array< {
-        __typename: "Comment",
-        id: string,
-        content: string,
-        createdAt: string,
-        updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        postCommentsId?: string | null,
-      } | null >,
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
-    blogPostsId?: string | null,
+    userTasksId?: string | null,
   } | null,
 };
 
-export type OnUpdatePostSubscription = {
-  onUpdatePost?:  {
-    __typename: "Post",
+export type OnUpdateTaskSubscription = {
+  onUpdateTask?:  {
+    __typename: "Task",
     id: string,
-    title: string,
-    blog?:  {
-      __typename: "Blog",
+    title?: string | null,
+    description?: string | null,
+    due_date?: string | null,
+    status?: TaskStatus | null,
+    district_id?: number | null,
+    user?:  {
+      __typename: "User",
       id: string,
-      name: string,
-      posts?:  {
-        __typename: "ModelPostConnection",
+      name?: string | null,
+      email?: string | null,
+      tasks?:  {
+        __typename: "ModelTaskConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -1391,42 +1099,31 @@ export type OnUpdatePostSubscription = {
       _deleted?: boolean | null,
       _lastChangedAt: number,
     } | null,
-    comments?:  {
-      __typename: "ModelCommentConnection",
-      items:  Array< {
-        __typename: "Comment",
-        id: string,
-        content: string,
-        createdAt: string,
-        updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        postCommentsId?: string | null,
-      } | null >,
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
-    blogPostsId?: string | null,
+    userTasksId?: string | null,
   } | null,
 };
 
-export type OnDeletePostSubscription = {
-  onDeletePost?:  {
-    __typename: "Post",
+export type OnDeleteTaskSubscription = {
+  onDeleteTask?:  {
+    __typename: "Task",
     id: string,
-    title: string,
-    blog?:  {
-      __typename: "Blog",
+    title?: string | null,
+    description?: string | null,
+    due_date?: string | null,
+    status?: TaskStatus | null,
+    district_id?: number | null,
+    user?:  {
+      __typename: "User",
       id: string,
-      name: string,
-      posts?:  {
-        __typename: "ModelPostConnection",
+      name?: string | null,
+      email?: string | null,
+      tasks?:  {
+        __typename: "ModelTaskConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -1436,147 +1133,11 @@ export type OnDeletePostSubscription = {
       _deleted?: boolean | null,
       _lastChangedAt: number,
     } | null,
-    comments?:  {
-      __typename: "ModelCommentConnection",
-      items:  Array< {
-        __typename: "Comment",
-        id: string,
-        content: string,
-        createdAt: string,
-        updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        postCommentsId?: string | null,
-      } | null >,
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
-    blogPostsId?: string | null,
-  } | null,
-};
-
-export type OnCreateCommentSubscription = {
-  onCreateComment?:  {
-    __typename: "Comment",
-    id: string,
-    post?:  {
-      __typename: "Post",
-      id: string,
-      title: string,
-      blog?:  {
-        __typename: "Blog",
-        id: string,
-        name: string,
-        createdAt: string,
-        updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-      } | null,
-      comments?:  {
-        __typename: "ModelCommentConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      blogPostsId?: string | null,
-    } | null,
-    content: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    postCommentsId?: string | null,
-  } | null,
-};
-
-export type OnUpdateCommentSubscription = {
-  onUpdateComment?:  {
-    __typename: "Comment",
-    id: string,
-    post?:  {
-      __typename: "Post",
-      id: string,
-      title: string,
-      blog?:  {
-        __typename: "Blog",
-        id: string,
-        name: string,
-        createdAt: string,
-        updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-      } | null,
-      comments?:  {
-        __typename: "ModelCommentConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      blogPostsId?: string | null,
-    } | null,
-    content: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    postCommentsId?: string | null,
-  } | null,
-};
-
-export type OnDeleteCommentSubscription = {
-  onDeleteComment?:  {
-    __typename: "Comment",
-    id: string,
-    post?:  {
-      __typename: "Post",
-      id: string,
-      title: string,
-      blog?:  {
-        __typename: "Blog",
-        id: string,
-        name: string,
-        createdAt: string,
-        updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-      } | null,
-      comments?:  {
-        __typename: "ModelCommentConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      blogPostsId?: string | null,
-    } | null,
-    content: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    postCommentsId?: string | null,
+    userTasksId?: string | null,
   } | null,
 };

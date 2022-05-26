@@ -1,6 +1,9 @@
 import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplify/datastore";
 
-
+export enum TaskStatus {
+  DONE = "DONE",
+  PENDING = "PENDING"
+}
 
 
 
@@ -8,15 +11,11 @@ type DistrictMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type BlogMetaData = {
+type UserMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type PostMetaData = {
-  readOnlyFields: 'createdAt' | 'updatedAt';
-}
-
-type CommentMetaData = {
+type TaskMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
@@ -34,33 +33,27 @@ export declare class District {
   static copyOf(source: District, mutator: (draft: MutableModel<District, DistrictMetaData>) => MutableModel<District, DistrictMetaData> | void): District;
 }
 
-export declare class Blog {
+export declare class User {
   readonly id: string;
-  readonly name: string;
-  readonly posts?: (Post | null)[] | null;
+  readonly name?: string | null;
+  readonly email?: string | null;
+  readonly tasks?: (Task | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  constructor(init: ModelInit<Blog, BlogMetaData>);
-  static copyOf(source: Blog, mutator: (draft: MutableModel<Blog, BlogMetaData>) => MutableModel<Blog, BlogMetaData> | void): Blog;
+  constructor(init: ModelInit<User, UserMetaData>);
+  static copyOf(source: User, mutator: (draft: MutableModel<User, UserMetaData>) => MutableModel<User, UserMetaData> | void): User;
 }
 
-export declare class Post {
+export declare class Task {
   readonly id: string;
-  readonly title: string;
-  readonly blog?: Blog | null;
-  readonly comments?: (Comment | null)[] | null;
+  readonly title?: string | null;
+  readonly description?: string | null;
+  readonly due_date?: string | null;
+  readonly status?: TaskStatus | keyof typeof TaskStatus | null;
+  readonly district_id?: number | null;
+  readonly user?: User | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  constructor(init: ModelInit<Post, PostMetaData>);
-  static copyOf(source: Post, mutator: (draft: MutableModel<Post, PostMetaData>) => MutableModel<Post, PostMetaData> | void): Post;
-}
-
-export declare class Comment {
-  readonly id: string;
-  readonly post?: Post | null;
-  readonly content: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-  constructor(init: ModelInit<Comment, CommentMetaData>);
-  static copyOf(source: Comment, mutator: (draft: MutableModel<Comment, CommentMetaData>) => MutableModel<Comment, CommentMetaData> | void): Comment;
+  constructor(init: ModelInit<Task, TaskMetaData>);
+  static copyOf(source: Task, mutator: (draft: MutableModel<Task, TaskMetaData>) => MutableModel<Task, TaskMetaData> | void): Task;
 }

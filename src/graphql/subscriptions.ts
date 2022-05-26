@@ -5,7 +5,6 @@
 export const onCreateDistrict = /* GraphQL */ `
   subscription OnCreateDistrict {
     onCreateDistrict {
-      id
       lea_id
       name
       address
@@ -23,7 +22,6 @@ export const onCreateDistrict = /* GraphQL */ `
 export const onUpdateDistrict = /* GraphQL */ `
   subscription OnUpdateDistrict {
     onUpdateDistrict {
-      id
       lea_id
       name
       address
@@ -41,7 +39,6 @@ export const onUpdateDistrict = /* GraphQL */ `
 export const onDeleteDistrict = /* GraphQL */ `
   subscription OnDeleteDistrict {
     onDeleteDistrict {
-      id
       lea_id
       name
       address
@@ -56,21 +53,26 @@ export const onDeleteDistrict = /* GraphQL */ `
     }
   }
 `;
-export const onCreateBlog = /* GraphQL */ `
-  subscription OnCreateBlog {
-    onCreateBlog {
+export const onCreateUser = /* GraphQL */ `
+  subscription OnCreateUser {
+    onCreateUser {
       id
       name
-      posts {
+      email
+      tasks {
         items {
           id
           title
+          description
+          due_date
+          status
+          district_id
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          blogPostsId
+          userTasksId
         }
         nextToken
         startedAt
@@ -83,21 +85,26 @@ export const onCreateBlog = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateBlog = /* GraphQL */ `
-  subscription OnUpdateBlog {
-    onUpdateBlog {
+export const onUpdateUser = /* GraphQL */ `
+  subscription OnUpdateUser {
+    onUpdateUser {
       id
       name
-      posts {
+      email
+      tasks {
         items {
           id
           title
+          description
+          due_date
+          status
+          district_id
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          blogPostsId
+          userTasksId
         }
         nextToken
         startedAt
@@ -110,21 +117,26 @@ export const onUpdateBlog = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteBlog = /* GraphQL */ `
-  subscription OnDeleteBlog {
-    onDeleteBlog {
+export const onDeleteUser = /* GraphQL */ `
+  subscription OnDeleteUser {
+    onDeleteUser {
       id
       name
-      posts {
+      email
+      tasks {
         items {
           id
           title
+          description
+          due_date
+          status
+          district_id
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          blogPostsId
+          userTasksId
         }
         nextToken
         startedAt
@@ -137,15 +149,20 @@ export const onDeleteBlog = /* GraphQL */ `
     }
   }
 `;
-export const onCreatePost = /* GraphQL */ `
-  subscription OnCreatePost {
-    onCreatePost {
+export const onCreateTask = /* GraphQL */ `
+  subscription OnCreateTask {
+    onCreateTask {
       id
       title
-      blog {
+      description
+      due_date
+      status
+      district_id
+      user {
         id
         name
-        posts {
+        email
+        tasks {
           nextToken
           startedAt
         }
@@ -155,38 +172,29 @@ export const onCreatePost = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
-      comments {
-        items {
-          id
-          content
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          postCommentsId
-        }
-        nextToken
-        startedAt
-      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      blogPostsId
+      userTasksId
     }
   }
 `;
-export const onUpdatePost = /* GraphQL */ `
-  subscription OnUpdatePost {
-    onUpdatePost {
+export const onUpdateTask = /* GraphQL */ `
+  subscription OnUpdateTask {
+    onUpdateTask {
       id
       title
-      blog {
+      description
+      due_date
+      status
+      district_id
+      user {
         id
         name
-        posts {
+        email
+        tasks {
           nextToken
           startedAt
         }
@@ -196,38 +204,29 @@ export const onUpdatePost = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
-      comments {
-        items {
-          id
-          content
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          postCommentsId
-        }
-        nextToken
-        startedAt
-      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      blogPostsId
+      userTasksId
     }
   }
 `;
-export const onDeletePost = /* GraphQL */ `
-  subscription OnDeletePost {
-    onDeletePost {
+export const onDeleteTask = /* GraphQL */ `
+  subscription OnDeleteTask {
+    onDeleteTask {
       id
       title
-      blog {
+      description
+      due_date
+      status
+      district_id
+      user {
         id
         name
-        posts {
+        email
+        tasks {
           nextToken
           startedAt
         }
@@ -237,137 +236,12 @@ export const onDeletePost = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
-      comments {
-        items {
-          id
-          content
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          postCommentsId
-        }
-        nextToken
-        startedAt
-      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      blogPostsId
-    }
-  }
-`;
-export const onCreateComment = /* GraphQL */ `
-  subscription OnCreateComment {
-    onCreateComment {
-      id
-      post {
-        id
-        title
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        comments {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        blogPostsId
-      }
-      content
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      postCommentsId
-    }
-  }
-`;
-export const onUpdateComment = /* GraphQL */ `
-  subscription OnUpdateComment {
-    onUpdateComment {
-      id
-      post {
-        id
-        title
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        comments {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        blogPostsId
-      }
-      content
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      postCommentsId
-    }
-  }
-`;
-export const onDeleteComment = /* GraphQL */ `
-  subscription OnDeleteComment {
-    onDeleteComment {
-      id
-      post {
-        id
-        title
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        comments {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        blogPostsId
-      }
-      content
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      postCommentsId
+      userTasksId
     }
   }
 `;

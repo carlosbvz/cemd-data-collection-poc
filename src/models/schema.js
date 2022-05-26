@@ -77,6 +77,14 @@ export const schema = {
                     "properties": {}
                 },
                 {
+                    "type": "key",
+                    "properties": {
+                        "fields": [
+                            "lea_id"
+                        ]
+                    }
+                },
+                {
                     "type": "auth",
                     "properties": {
                         "rules": [
@@ -94,8 +102,8 @@ export const schema = {
                 }
             ]
         },
-        "Blog": {
-            "name": "Blog",
+        "User": {
+            "name": "User",
             "fields": {
                 "id": {
                     "name": "id",
@@ -108,21 +116,28 @@ export const schema = {
                     "name": "name",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
-                "posts": {
-                    "name": "posts",
+                "email": {
+                    "name": "email",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "tasks": {
+                    "name": "tasks",
                     "isArray": true,
                     "type": {
-                        "model": "Post"
+                        "model": "Task"
                     },
                     "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "blogPostsId"
+                        "associatedWith": "userTasksId"
                     }
                 },
                 "createdAt": {
@@ -143,7 +158,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "Blogs",
+            "pluralName": "Users",
             "attributes": [
                 {
                     "type": "model",
@@ -167,8 +182,8 @@ export const schema = {
                 }
             ]
         },
-        "Post": {
-            "name": "Post",
+        "Task": {
+            "name": "Task",
             "fields": {
                 "id": {
                     "name": "id",
@@ -181,107 +196,51 @@ export const schema = {
                     "name": "title",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
-                "blog": {
-                    "name": "blog",
-                    "isArray": false,
-                    "type": {
-                        "model": "Blog"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "blogPostsId"
-                    }
-                },
-                "comments": {
-                    "name": "comments",
-                    "isArray": true,
-                    "type": {
-                        "model": "Comment"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "postCommentsId"
-                    }
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "Posts",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "Comment": {
-            "name": "Comment",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "post": {
-                    "name": "post",
-                    "isArray": false,
-                    "type": {
-                        "model": "Post"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "postCommentsId"
-                    }
-                },
-                "content": {
-                    "name": "content",
+                "description": {
+                    "name": "description",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
+                },
+                "due_date": {
+                    "name": "due_date",
+                    "isArray": false,
+                    "type": "AWSDate",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "status": {
+                    "name": "status",
+                    "isArray": false,
+                    "type": {
+                        "enum": "TaskStatus"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "district_id": {
+                    "name": "district_id",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "user": {
+                    "name": "user",
+                    "isArray": false,
+                    "type": {
+                        "model": "User"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "userTasksId"
+                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -301,7 +260,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "Comments",
+            "pluralName": "Tasks",
             "attributes": [
                 {
                     "type": "model",
@@ -326,7 +285,15 @@ export const schema = {
             ]
         }
     },
-    "enums": {},
+    "enums": {
+        "TaskStatus": {
+            "name": "TaskStatus",
+            "values": [
+                "DONE",
+                "PENDING"
+            ]
+        }
+    },
     "nonModels": {},
-    "version": "4113afc377c4acaf99c1d4f075e1e709"
+    "version": "53bcecb801303bac9fe55d26b614cd0b"
 };
