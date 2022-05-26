@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import DistrictService from "../services/DistrictService";
 import * as queries from '../graphql/queries';
@@ -80,10 +82,11 @@ function getTableData({type, cemdAPIDataItems, overridesDataItems}) {
   }
 }
 
-export default function CustomDataGrid({ type }) {
+export default function DistrictsDataGrid({ type }) {
   const [cemdAPIData, setCemdAPIData] = useState(null);
   const [overridesData, setOverridesData] = useState(null);
   const [mergedData, setMergedData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   // Loading Data
   useEffect(() => {
@@ -105,6 +108,7 @@ export default function CustomDataGrid({ type }) {
       });
       setCemdAPIData(cemdAPIDataItems);
       setOverridesData(overridesDataItems);
+      setLoading(false);
     };
     loadData();
   }, [type]);
@@ -123,28 +127,34 @@ export default function CustomDataGrid({ type }) {
         // Need to get the item newest version
         const district = await API.graphql({ query: queries.getDistrict, variables: { lea_id: existingItem?.lea_id }}) as any;
         const districtItem = district?.data?.getDistrict;
-        debugger
         // Using latest item
         const input = { lea_id: districtItem?.lea_id, _version: districtItem._version, ...item };
         // Updating... 
         await API.graphql(graphqlOperation(updateDistrict, { input }));
       // Create
       } else {
-        debugger
         const newItem = await API.graphql(graphqlOperation(createDistrict, {input: item})) as any;
         setOverridesData([...overridesData, newItem.data.createDistrict]);
       }
-      
-      
-    
     } catch (err) {
       console.log("error", err);
     }
   };
 
+  if (loading) {
+    return (
+      <Box sx={{ display: 'flex' }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+
   if (!mergedData?.columns || !mergedData?.rows) {
     return null;
   }
+
+
 
   return (
     <div style={{ height: 640, width: "100%" }}>

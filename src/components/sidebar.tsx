@@ -31,12 +31,12 @@ export default function SideBar({onClick}) {
         <ListItemText primary="Districts" />
       </ListItemButton>
 
-      <ListItemButton onClick={() => handleItemClick('products')}>
+      {/* <ListItemButton onClick={() => handleItemClick('products')}>
         <ListItemIcon>
           <DraftsIcon />
         </ListItemIcon>
         <ListItemText primary="Products" />
-      </ListItemButton>
+      </ListItemButton> */}
 
       <ListItemButton onClick={() => handleItemClick('tasks')}>
         <ListItemIcon>
