@@ -14,7 +14,6 @@ const titles = {
   products: "Products",
   collector: "Collectors",
   tasks: "All Tasks",
-  "single-district": "Single District",
 }
 
 export default function Contentpanel({ type }: Props) {
@@ -26,7 +25,6 @@ export default function Contentpanel({ type }: Props) {
         {titles[type]}
       </Typography>
       {type === "district" && <DistrictsDataGrid type={type} />}
-      {type === "single-district" && <SingleDistrict />} 
       {type === "products" && <ProductsListGrid />} 
       {type === "collector" && <CollectorsGrid  />}
     </>

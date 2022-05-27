@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import DistrictService from "../services/DistrictService";
 import * as queries from "../graphql/queries";
 import { API, graphqlOperation } from "aws-amplify";
 import { createDistrict, updateDistrict } from "../graphql/mutations";
+import { Grid, Button, Box } from "@mui/material";
+import TransferProductToDistrict from "./TransferProductToDistrict";
 
 const cache = {};
 
@@ -84,13 +85,12 @@ function getTableData({ type, cemdAPIDataItems, overridesDataItems }) {
   }
 }
 
-
-
 export default function DistrictsDataGrid({ type }) {
   const [cemdAPIData, setCemdAPIData] = useState(null);
   const [overridesData, setOverridesData] = useState(null);
   const [mergedData, setMergedData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
 
   // Loading Data
   useEffect(() => {
@@ -183,18 +183,42 @@ export default function DistrictsDataGrid({ type }) {
     return null;
   }
 
+  const handleTogglePanel = () => {
+    setIsPanelOpen(!isPanelOpen);
+  };
+
   return (
-    <div style={{ height: 640, width: "100%" }}>
-      
-      <DataGrid
-        rows={mergedData?.rows}
-        columns={mergedData?.columns}
-        pageSize={10}
-        rowsPerPageOptions={[10]}
-        checkboxSelection
-        disableSelectionOnClick
-        onCellEditCommit={handleOnItemChange}
-      />
-    </div>
+    <>
+      <Button variant="text" onClick={handleTogglePanel}>
+        Show Details
+      </Button>
+      <Grid container spacing={2}>
+        <Grid
+          item
+          sx={{ width: "100%", height: "650px" }}
+          xs={isPanelOpen ? 7 : 12}
+        >
+          <DataGrid
+            rows={mergedData?.rows}
+            columns={mergedData?.columns}
+            pageSize={10}
+            rowsPerPageOptions={[10]}
+            checkboxSelection
+            disableSelectionOnClick
+            onCellEditCommit={handleOnItemChange}
+          />
+        </Grid>
+
+        {isPanelOpen && (
+        <Grid
+          item
+          sx={{ width: "100%" }}
+          xs={5}
+        >
+          <TransferProductToDistrict />
+        </Grid>
+        )}
+      </Grid>
+    </>
   );
 }

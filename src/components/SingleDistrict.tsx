@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Typography, Box } from "@mui/material";
-import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
-import TransferProductToDistrict from "./TransferProductToDistrict";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 
 const districtColumns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 120 },
@@ -111,7 +110,6 @@ export default function SingleDistrict() {
           rowsPerPageOptions={[5]}
           disableSelectionOnClick
         />
-        <TransferProductToDistrict />
       </Box>
     </>
   );

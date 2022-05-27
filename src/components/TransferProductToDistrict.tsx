@@ -118,7 +118,7 @@ export default function TransferProductToDistrict() {
                   }}
                 />
               </ListItemIcon>
-              <ListItemText id={labelId} primary={`List item ${value + 1}`} />
+              <ListItemText id={labelId} primary={`Product # ${value + 1}`} />
             </ListItem>
           );
         })}
@@ -129,7 +129,7 @@ export default function TransferProductToDistrict() {
 
   return (
     <Grid container spacing={2} justifyContent="center" alignItems="center">
-      <Grid item>{customList('Choices', left)}</Grid>
+      <Grid item>{customList('Available Products', left)}</Grid>
       <Grid item>
         <Grid container direction="column" alignItems="center">
           <Button
@@ -154,7 +154,7 @@ export default function TransferProductToDistrict() {
           </Button>
         </Grid>
       </Grid>
-      <Grid item>{customList('Chosen', right)}</Grid>
+      <Grid item>{customList('Current Products', right)}</Grid>
     </Grid>
   );
 }
