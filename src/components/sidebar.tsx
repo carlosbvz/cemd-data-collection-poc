@@ -28,21 +28,35 @@ export default function SideBar({onClick}) {
         <ListItemIcon>
           <SendIcon />
         </ListItemIcon>
-        <ListItemText primary="Districts" />
+        <ListItemText primary="All Districts Demo View" />
       </ListItemButton>
 
-      {/* <ListItemButton onClick={() => handleItemClick('products')}>
+      <ListItemButton onClick={() => handleItemClick('single-district')}>
         <ListItemIcon>
-          <DraftsIcon />
+          <SendIcon />
         </ListItemIcon>
-        <ListItemText primary="Products" />
-      </ListItemButton> */}
+        <ListItemText primary="Single District Demo View" />
+      </ListItemButton>
+
+      <ListItemButton onClick={() => handleItemClick('products')}>
+        <ListItemIcon>
+          <SendIcon />
+        </ListItemIcon>
+        <ListItemText primary="Products Demo View" />
+      </ListItemButton>
+
+      <ListItemButton onClick={() => handleItemClick('collector')}>
+        <ListItemIcon>
+          <SendIcon />
+        </ListItemIcon>
+        <ListItemText primary="Collectors Demo View" />
+      </ListItemButton>
 
       <ListItemButton onClick={() => handleItemClick('tasks')}>
         <ListItemIcon>
-          <DraftsIcon />
+          <SendIcon />
         </ListItemIcon>
-        <ListItemText primary="Tasks" />
+        <ListItemText primary="Tasks Demo View" />
       </ListItemButton>
 
     </List>
